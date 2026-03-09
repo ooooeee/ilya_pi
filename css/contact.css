@@ -1,0 +1,42 @@
+.contact {
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-secondary) 100%);
+  text-align: center;
+}
+
+.contact__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact .section__title {
+  text-align: center;
+}
+
+.contact .section__subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact__actions {
+  display: flex;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: var(--gap-xl);
+}
+
+.contact__info {
+  margin-top: var(--gap-md);
+}
+
+.contact__link {
+  font-size: var(--fs-body);
+  color: var(--color-light-gray);
+  transition: color var(--transition-fast);
+}
+
+.contact__link:hover {
+  color: var(--color-accent);
+}

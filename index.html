@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Илья Пи — Дизайн, Маркетинг, Digital</title>
+  <meta name="description" content="Портфолио специалиста в сфере дизайна, маркетинга, создания сайтов и digital-технологий">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/services.css">
+  <link rel="stylesheet" href="css/cases.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/media.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__container">
+      <a href="index.html" class="header__logo" aria-label="Главная">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <path d="M18 3L3 15V33H13V23H23V33H33V15L18 3Z" fill="#AF2F2F"/>
+          <rect x="15" y="10" width="6" height="6" rx="1" fill="white"/>
+        </svg>
+      </a>
+      <nav class="header__nav" id="headerNav">
+        <a href="#services" class="header__link">услуги</a>
+        <a href="#about" class="header__link">этапы</a>
+        <a href="#contact" class="header__link">контакты</a>
+        <a href="#cases" class="header__link">портфолио</a>
+        <a href="#about" class="header__link">обо мне</a>
+      </nav>
+      <a href="#contact" class="header__cta-wrap">
+        <span class="header__cta-bg"></span>
+        <span class="header__cta-text">обсудить проект</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Burger Button (appears after scroll) -->
+  <button class="burger" id="burger" aria-label="Открыть меню">
+    <span class="burger__line"></span>
+    <span class="burger__line"></span>
+    <span class="burger__line"></span>
+  </button>
+
+  <!-- Mobile Menu Panel -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="menu-panel" id="menuPanel">
+    <button class="menu-panel__close" id="menuClose" aria-label="Закрыть меню">
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="menu-panel__nav">
+      <a href="index.html" class="menu-panel__link">Главная</a>
+      <a href="#services" class="menu-panel__link">Услуги</a>
+      <a href="#about" class="menu-panel__link">Обо мне</a>
+      <a href="#cases" class="menu-panel__link">Портфолио</a>
+      <a href="#contact" class="menu-panel__link">Контакты</a>
+    </nav>
+    <a href="#contact" class="btn btn--primary menu-panel__cta">Обсудить проект</a>
+  </aside>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <canvas class="hero__canvas" id="heroCanvas"></canvas>
+    <div class="hero__glow hero__glow--1"></div>
+    <div class="hero__glow hero__glow--2"></div>
+    <div class="hero__glow hero__glow--3"></div>
+    <div class="container hero__container">
+      <h1 class="hero__title">Маркетинг</h1>
+      <div class="hero__bottom">
+        <div class="hero__bottom-left">
+          <p class="hero__subtitle">Создаю рекламу и дизайн - для<br>привлечения лидов и взглядов</p>
+          <div class="hero__tags">
+            <span class="hero__tag">дизайн</span>
+            <span class="hero__tag">маркетинг</span>
+            <span class="hero__tag">брендинг</span>
+            <span class="hero__tag">сайты</span>
+            <span class="hero__tag">Avito</span>
+          </div>
+        </div>
+        <div class="hero__bottom-right">
+          <a href="#contact" class="hero__cta">Хочу тоже</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about section section--light" id="about">
+    <div class="container">
+      <h2 class="section__title">Обо мне</h2>
+      <div class="about__grid">
+        <div class="about__text">
+          <p class="about__description">
+            Я — специалист в сфере дизайна, маркетинга и digital-технологий с опытом создания эффективных цифровых решений. Работаю на стыке креатива и аналитики, помогая бизнесу расти через качественный дизайн и продуманный маркетинг.
+          </p>
+          <p class="about__description">
+            Мой подход — это глубокое погружение в задачу клиента, исследование аудитории и создание продуктов, которые не просто красиво выглядят, но и приносят измеримый результат.
+          </p>
+        </div>
+        <div class="about__stats">
+          <div class="about__stat">
+            <span class="about__stat-number">50+</span>
+            <span class="about__stat-label">Реализованных проектов</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-number">5+</span>
+            <span class="about__stat-label">Лет опыта</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-number">30+</span>
+            <span class="about__stat-label">Довольных клиентов</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services / Directions Section -->
+  <section class="services section section--dark" id="services">
+    <div class="services__bg-grid"></div>
+    <div class="services__cursor-container" id="servicesCursorContainer">
+      <div class="services__cursor" id="servicesCursor"></div>
+    </div>
+    <div class="container">
+      <h2 class="section__title">Направления</h2>
+      <p class="section__subtitle">Полный спектр digital-услуг для вашего бизнеса</p>
+      <div class="services__layout">
+        <!-- Left: Accordion -->
+        <div class="services__accordion" id="servicesAccordion">
+          <div class="services__item services__item--active" data-index="0">
+            <button class="services__item-header">
+              <span class="services__item-number">01</span>
+              <span class="services__item-title">Дизайн</span>
+              <span class="services__item-arrow">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <div class="services__item-body">
+              <p>UI/UX дизайн, фирменный стиль, брендинг, презентации и графический дизайн любой сложности.</p>
+            </div>
+          </div>
+          <div class="services__item" data-index="1">
+            <button class="services__item-header">
+              <span class="services__item-number">02</span>
+              <span class="services__item-title">Маркетинг</span>
+              <span class="services__item-arrow">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <div class="services__item-body">
+              <p>Стратегия продвижения, контент-маркетинг, SMM, таргетированная и контекстная реклама.</p>
+            </div>
+          </div>
+          <div class="services__item" data-index="2">
+            <button class="services__item-header">
+              <span class="services__item-number">03</span>
+              <span class="services__item-title">Создание сайтов</span>
+              <span class="services__item-arrow">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <div class="services__item-body">
+              <p>Разработка лендингов, корпоративных сайтов, интернет-магазинов и веб-приложений.</p>
+            </div>
+          </div>
+          <div class="services__item" data-index="3">
+            <button class="services__item-header">
+              <span class="services__item-number">04</span>
+              <span class="services__item-title">Digital-решения</span>
+              <span class="services__item-arrow">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <div class="services__item-body">
+              <p>Комплексная digital-стратегия, аналитика, автоматизация процессов и интеграция сервисов.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Right: 3D Content Viewer -->
+        <div class="services__viewer" id="servicesViewer">
+          <div class="services__scene" id="servicesScene">
+            <!-- Scene 0: Design -->
+            <div class="services__3d services__3d--active" data-scene="0">
+              <div class="services__obj services__obj--cube">
+                <div class="services__cube">
+                  <div class="services__cube-face services__cube-face--front"></div>
+                  <div class="services__cube-face services__cube-face--back"></div>
+                  <div class="services__cube-face services__cube-face--right"></div>
+                  <div class="services__cube-face services__cube-face--left"></div>
+                  <div class="services__cube-face services__cube-face--top"></div>
+                  <div class="services__cube-face services__cube-face--bottom"></div>
+                </div>
+              </div>
+              <div class="services__obj services__obj--ring services__obj--float1"></div>
+              <div class="services__obj services__obj--dot services__obj--float2"></div>
+            </div>
+            <!-- Scene 1: Marketing -->
+            <div class="services__3d" data-scene="1">
+              <div class="services__obj services__obj--pyramid">
+                <div class="services__pyramid">
+                  <div class="services__pyramid-face services__pyramid-face--1"></div>
+                  <div class="services__pyramid-face services__pyramid-face--2"></div>
+                  <div class="services__pyramid-face services__pyramid-face--3"></div>
+                  <div class="services__pyramid-face services__pyramid-face--4"></div>
+                </div>
+              </div>
+              <div class="services__obj services__obj--ring services__obj--float3"></div>
+              <div class="services__obj services__obj--dot services__obj--float1"></div>
+            </div>
+            <!-- Scene 2: Web -->
+            <div class="services__3d" data-scene="2">
+              <div class="services__obj services__obj--sphere"></div>
+              <div class="services__obj services__obj--orbit"></div>
+              <div class="services__obj services__obj--dot services__obj--float2"></div>
+            </div>
+            <!-- Scene 3: Digital -->
+            <div class="services__3d" data-scene="3">
+              <div class="services__obj services__obj--octahedron">
+                <div class="services__octa">
+                  <div class="services__octa-face services__octa-face--1"></div>
+                  <div class="services__octa-face services__octa-face--2"></div>
+                  <div class="services__octa-face services__octa-face--3"></div>
+                  <div class="services__octa-face services__octa-face--4"></div>
+                  <div class="services__octa-face services__octa-face--5"></div>
+                  <div class="services__octa-face services__octa-face--6"></div>
+                  <div class="services__octa-face services__octa-face--7"></div>
+                  <div class="services__octa-face services__octa-face--8"></div>
+                </div>
+              </div>
+              <div class="services__obj services__obj--ring services__obj--float1"></div>
+              <div class="services__obj services__obj--dot services__obj--float3"></div>
+            </div>
+          </div>
+          <!-- Timer progress bar -->
+          <div class="services__progress">
+            <div class="services__progress-bar" id="servicesProgressBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases Section -->
+  <section class="cases section section--light" id="cases">
+    <div class="container">
+      <h2 class="section__title">Кейсы</h2>
+      <p class="section__subtitle">Избранные проекты из моего портфолио</p>
+      <div class="cases__grid" id="casesGrid">
+        <!-- Cases rendered by JS -->
+      </div>
+      <div class="cases__more">
+        <a href="cases.html" class="btn btn--outline">Посмотреть все</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact section section--dark" id="contact">
+    <div class="contact__aurora"></div>
+    <div class="container contact__container">
+      <h2 class="section__title">Давайте работать вместе</h2>
+      <p class="section__subtitle">Есть идея или проект? Напишите мне, и мы обсудим, как я могу помочь вашему бизнесу.</p>
+      <div class="contact__actions">
+        <a href="mailto:hello@ilyapi.ru" class="btn btn--primary">Написать на почту</a>
+        <a href="https://t.me/" class="btn btn--white-outline">Telegram</a>
+      </div>
+      <div class="contact__info">
+        <a href="mailto:hello@ilyapi.ru" class="contact__link">hello@ilyapi.ru</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__left">
+        <a href="index.html" class="footer__logo">ILYA.PI</a>
+        <p class="footer__copy">&copy; 2026 Все права защищены</p>
+      </div>
+      <div class="footer__nav">
+        <a href="#about" class="footer__link">Обо мне</a>
+        <a href="#services" class="footer__link">Услуги</a>
+        <a href="#cases" class="footer__link">Кейсы</a>
+        <a href="#contact" class="footer__link">Контакты</a>
+      </div>
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Telegram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/>
+          </svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="Behance">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.5 11c1.38 0 2.5-1.12 2.5-2.5S8.88 6 7.5 6H3v5h4.5zm0 2H3v5h4.5c1.38 0 2.5-1.12 2.5-2.5S8.88 13 7.5 13zM21 6h-5v1.5h5V6zm-2.5 4c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5c1.52 0 2.87-.76 3.69-1.92l-1.53-1.03c-.49.69-1.28 1.14-2.16 1.14-1.24 0-2.28-.85-2.62-2h6.78c.06-.31.09-.63.09-.97 0-2.35-1.78-4.22-4.15-4.22zm-2.62 3.5c.34-1.15 1.38-2 2.62-2s2.28.85 2.62 2h-5.24z"/>
+          </svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="Dribbble">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.424 25.424 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.245.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="data/cases-data.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/cases.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

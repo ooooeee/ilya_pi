@@ -1,0 +1,255 @@
+/* ==========================================
+   HEADER — full navigation bar on hero
+   ========================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: var(--z-header);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: var(--gap-lg);
+}
+
+.header__logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header__nav {
+  display: flex;
+  gap: clamp(16px, 2.5vw, 36px);
+  margin-left: var(--gap-md);
+}
+
+.header__link {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--color-text-white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.header__link:hover {
+  color: var(--color-accent);
+}
+
+/* ==========================================
+   CTA BUTTON — "обсудить проект"
+   White-bordered with red pseudo-element
+   ========================================== */
+.header__cta-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Red pseudo-element behind the button */
+.header__cta-bg {
+  position: absolute;
+  top: -10px;
+  left: -18px;
+  width: 70%;
+  height: 100%;
+  background: var(--color-accent);
+  z-index: 0;
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.header__cta-wrap:hover .header__cta-bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Visible button label */
+.header__cta-text {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border: 1px solid var(--color-text-white);
+  color: var(--color-text-white);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: border-color 1s ease;
+}
+
+.header__cta-wrap:hover .header__cta-text {
+  border-color: var(--color-accent);
+}
+
+/* Header hidden state (after scrolling past hero) */
+.header--hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================
+   BURGER BUTTON — fixed, appears after hero
+   ========================================== */
+.burger {
+  position: fixed;
+  top: 24px;
+  right: clamp(16px, 4vw, 40px);
+  z-index: var(--z-burger);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--color-dark);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.burger--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.burger__line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-white);
+  border-radius: 2px;
+  transition: all var(--transition-base);
+}
+
+.burger:hover .burger__line {
+  background: var(--color-accent);
+}
+
+/* ==========================================
+   MENU OVERLAY — darkened background
+   ========================================== */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: var(--z-menu-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+  backdrop-filter: blur(4px);
+}
+
+.menu-overlay--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================
+   MENU PANEL — slides from right
+   ========================================== */
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  max-width: 85vw;
+  height: 100%;
+  background: var(--color-dark);
+  z-index: var(--z-menu-panel);
+  display: flex;
+  flex-direction: column;
+  padding: var(--gap-xl);
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+}
+
+.menu-panel--active {
+  transform: translateX(0);
+}
+
+/* Close button */
+.menu-panel__close {
+  align-self: flex-end;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: var(--gap-xxl);
+}
+
+.menu-panel__close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text-white);
+  border-radius: 2px;
+  transition: background var(--transition-fast);
+}
+
+.menu-panel__close span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.menu-panel__close span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.menu-panel__close:hover span {
+  background: var(--color-accent);
+}
+
+/* Navigation links */
+.menu-panel__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  flex: 1;
+}
+
+.menu-panel__link {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--color-text-light);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.menu-panel__link:hover {
+  color: var(--color-accent);
+  transform: translateX(8px);
+}
+
+/* CTA at the bottom */
+.menu-panel__cta {
+  margin-top: auto;
+  text-align: center;
+  width: 100%;
+}

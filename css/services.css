@@ -1,0 +1,575 @@
+/* ============================================
+   Services / Directions Section
+   ============================================ */
+
+.services {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================
+   Cursor Follower
+   ============================================ */
+
+.services,
+.services * {
+  cursor: none !important;
+}
+
+/* Container for liquid effect - uses filter combination */
+.services__cursor-container {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  /* Blur + contrast creates liquid/morphing effect */
+  filter: blur(8px) contrast(3);
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+.services__cursor-container--visible {
+  opacity: 1;
+}
+
+/* The actual cursor circle */
+.services__cursor {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(175, 47, 47, 0.9) 0%, 
+    rgba(175, 47, 47, 0.6) 50%, 
+    rgba(175, 47, 47, 0.3) 100%);
+  box-shadow: 
+    0 0 30px rgba(175, 47, 47, 0.6),
+    0 0 60px rgba(175, 47, 47, 0.3);
+  transform: scale(1);
+}
+
+/* Pulse animation on click */
+.services__cursor--pulse {
+  animation: cursorPulse 0.6s ease-out;
+}
+
+@keyframes cursorPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(175, 47, 47, 0.6);
+  }
+  50% {
+    transform: scale(1.5);
+    box-shadow: 0 0 60px rgba(175, 47, 47, 0.8), 0 0 100px rgba(175, 47, 47, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(175, 47, 47, 0.6);
+  }
+}
+
+/* Hide cursor follower on touch devices */
+@media (hover: none) {
+  .services__cursor-container {
+    display: none;
+  }
+  
+  .services,
+  .services * {
+    cursor: auto !important;
+  }
+}
+
+.services__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gridShift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(60px, 60px); }
+}
+
+/* Layout: 2 columns */
+.services__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-xl);
+  align-items: stretch;
+  position: relative;
+  z-index: 10;
+}
+
+/* ============================================
+   Accordion (Left Column)
+   ============================================ */
+
+.services__accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  height: 500px;
+}
+
+.services__item {
+  background: var(--color-dark-card);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.services__item--active {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 30px rgba(175, 47, 47, 0.2);
+}
+
+.services__item-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-lg);
+  width: 100%;
+  padding: var(--gap-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-base);
+}
+
+.services__item-header:hover {
+  background: rgba(175, 47, 47, 0.1);
+}
+
+.services__item-number {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--color-accent);
+  min-width: 32px;
+}
+
+.services__item-title {
+  flex: 1;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--color-text-white);
+  transition: color var(--transition-base);
+}
+
+.services__item-header:hover .services__item-title {
+  color: var(--color-accent);
+}
+
+.services__item-arrow {
+  color: var(--color-text-light);
+  transition: transform var(--transition-base);
+}
+
+.services__item--active .services__item-arrow {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+
+.services__item-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base);
+}
+
+.services__item--active .services__item-body {
+  max-height: 200px;
+}
+
+.services__item-body p {
+  padding: 0 var(--gap-lg) var(--gap-lg);
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--color-light-gray);
+}
+
+/* ============================================
+   3D Content Viewer (Right Column)
+   ============================================ */
+
+.services__viewer {
+  position: relative;
+  background: var(--color-dark-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: 500px;
+  overflow: hidden;
+}
+
+.services__scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.services__3d {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.services__3d--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================
+   3D Objects - Base Styles
+   ============================================ */
+
+.services__obj {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+/* Floating animations */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-5deg); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-25px) rotate(8deg); }
+}
+
+.services__obj--float1 {
+  animation: float1 6s ease-in-out infinite;
+}
+
+.services__obj--float2 {
+  animation: float2 7s ease-in-out infinite;
+}
+
+.services__obj--float3 {
+  animation: float3 8s ease-in-out infinite;
+}
+
+/* ============================================
+   Cube (Design)
+   ============================================ */
+
+.services__obj--cube {
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  animation: rotateCube 20s linear infinite;
+}
+
+@keyframes rotateCube {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.services__cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.services__cube-face {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  opacity: 0.9;
+}
+
+.services__cube-face--front  { transform: translateZ(60px); }
+.services__cube-face--back   { transform: rotateY(180deg) translateZ(60px); }
+.services__cube-face--right  { transform: rotateY(90deg) translateZ(60px); }
+.services__cube-face--left   { transform: rotateY(-90deg) translateZ(60px); }
+.services__cube-face--top    { transform: rotateX(90deg) translateZ(60px); }
+.services__cube-face--bottom { transform: rotateX(-90deg) translateZ(60px); }
+
+/* Ring */
+.services__obj--ring {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid rgba(175, 47, 47, 0.3);
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+  animation: rotateRing 15s linear infinite;
+}
+
+@keyframes rotateRing {
+  0% { transform: rotateX(70deg) rotateY(0deg); }
+  100% { transform: rotateX(70deg) rotateY(360deg); }
+}
+
+/* Dot */
+.services__obj--dot {
+  width: 20px;
+  height: 20px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 30px var(--color-accent);
+}
+
+/* ============================================
+   Pyramid (Marketing)
+   ============================================ */
+
+.services__obj--pyramid {
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  animation: rotatePyramid 25s linear infinite;
+}
+
+@keyframes rotatePyramid {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.services__pyramid {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.services__pyramid-face {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 120px solid rgba(175, 47, 47, 0.8);
+  transform-origin: center bottom;
+}
+
+.services__pyramid-face--1 { transform: rotateY(0deg) translateZ(52px); }
+.services__pyramid-face--2 { transform: rotateY(90deg) translateZ(52px); }
+.services__pyramid-face--3 { transform: rotateY(180deg) translateZ(52px); }
+.services__pyramid-face--4 { transform: rotateY(-90deg) translateZ(52px); }
+
+/* ============================================
+   Sphere (Web)
+   ============================================ */
+
+.services__obj--sphere {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--color-accent), #5a1a1a);
+  top: 50%;
+  left: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  animation: pulseSphere 4s ease-in-out infinite;
+  box-shadow: 
+    inset -20px -20px 40px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(175, 47, 47, 0.4);
+}
+
+@keyframes pulseSphere {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.services__obj--orbit {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px dashed rgba(175, 47, 47, 0.4);
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+  animation: rotateOrbit 30s linear infinite;
+}
+
+@keyframes rotateOrbit {
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); }
+}
+
+/* ============================================
+   Octahedron (Digital)
+   ============================================ */
+
+.services__obj--octahedron {
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  animation: rotateOcta 22s linear infinite;
+}
+
+@keyframes rotateOcta {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.services__octa {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.services__octa-face {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 42px solid transparent;
+  border-right: 42px solid transparent;
+  border-bottom: 85px solid rgba(175, 47, 47, 0.7);
+  transform-origin: center;
+}
+
+.services__octa-face--1 { transform: rotateY(0deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--2 { transform: rotateY(45deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--3 { transform: rotateY(90deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--4 { transform: rotateY(135deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--5 { transform: rotateY(180deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--6 { transform: rotateY(225deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--7 { transform: rotateY(270deg) translateZ(42px) rotateX(35deg); }
+.services__octa-face--8 { transform: rotateY(315deg) translateZ(42px) rotateX(35deg); }
+
+/* ============================================
+   Progress Bar
+   ============================================ */
+
+.services__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.services__progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--color-accent);
+  transition: width 0.1s linear;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 992px) {
+  .services__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .services__accordion {
+    height: auto;
+    min-height: 200px;
+  }
+
+  .services__viewer {
+    height: 350px;
+  }
+
+  .services__obj--cube,
+  .services__obj--pyramid,
+  .services__obj--sphere,
+  .services__obj--octahedron {
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+  }
+
+  .services__cube-face {
+    width: 80px;
+    height: 80px;
+  }
+
+  .services__cube-face--front  { transform: translateZ(40px); }
+  .services__cube-face--back   { transform: rotateY(180deg) translateZ(40px); }
+  .services__cube-face--right  { transform: rotateY(90deg) translateZ(40px); }
+  .services__cube-face--left   { transform: rotateY(-90deg) translateZ(40px); }
+  .services__cube-face--top    { transform: rotateX(90deg) translateZ(40px); }
+  .services__cube-face--bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+  .services__obj--ring,
+  .services__obj--orbit {
+    width: 140px;
+    height: 140px;
+    margin-left: -70px;
+    margin-top: -70px;
+  }
+
+  .services__pyramid-face {
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 80px solid rgba(175, 47, 47, 0.8);
+  }
+
+  .services__pyramid-face--1 { transform: rotateY(0deg) translateZ(35px); }
+  .services__pyramid-face--2 { transform: rotateY(90deg) translateZ(35px); }
+  .services__pyramid-face--3 { transform: rotateY(180deg) translateZ(35px); }
+  .services__pyramid-face--4 { transform: rotateY(-90deg) translateZ(35px); }
+
+  .services__obj--sphere {
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+  }
+
+  .services__octa-face {
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    border-bottom: 56px solid rgba(175, 47, 47, 0.7);
+  }
+}
+
+@media (max-width: 768px) {
+  .services__viewer {
+    height: 300px;
+  }
+
+  .services__accordion {
+    min-height: 180px;
+  }
+
+  .services__item-title {
+    font-size: var(--fs-body);
+  }
+}
