@@ -13,6 +13,9 @@ const CaseDetail = (() => {
     cms: 'CMS системы'
   };
 
+  let currentSlide = 0;
+  let allSlides = [];
+
   function init() {
     const container = document.getElementById('caseDetail');
     if (!container) return;
@@ -45,27 +48,50 @@ const CaseDetail = (() => {
       .map(tag => `<span class="tag">${tag}</span>`)
       .join('');
 
-    const heroImageHTML = caseItem.image
-      ? `<img src="${caseItem.image}" alt="${caseItem.title}">`
-      : `<span class="case-detail__hero-placeholder">${caseItem.title}</span>`;
-
-    // Gallery section (only if images exist)
-    let galleryHTML = '';
+    // Build slider HTML if images exist
+    let sliderHTML = '';
     if (caseItem.images && caseItem.images.length > 0) {
-      const galleryItems = caseItem.images
-        .map(img => `
-          <div class="case-detail__gallery-item">
-            <img src="${img}" alt="${caseItem.title}" loading="lazy">
+      allSlides = [caseItem.image, ...caseItem.images].filter(Boolean);
+      currentSlide = 0;
+
+      const slidesHTML = allSlides
+        .map((img, index) => `
+          <div class="case-detail__slider-slide" data-index="${index}">
+            <img src="${img}" alt="${caseItem.title}">
           </div>
         `)
         .join('');
 
-      galleryHTML = `
-        <div class="case-detail__gallery">
-          <h3 class="case-detail__gallery-title">Галерея</h3>
-          <div class="case-detail__gallery-grid">${galleryItems}</div>
+      const dotsHTML = allSlides
+        .map((_, index) => `<div class="case-detail__slider-dot${index === 0 ? ' case-detail__slider-dot--active' : ''}" data-index="${index}"></div>`)
+        .join('');
+
+      sliderHTML = `
+        <div class="case-detail__slider">
+          <div class="case-detail__slider-track">
+            ${slidesHTML}
+          </div>
+          <button class="case-detail__slider-btn case-detail__slider-btn--prev" aria-label="Предыдущее фото">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="case-detail__slider-btn case-detail__slider-btn--next" aria-label="Следующее фото">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+          <div class="case-detail__slider-dots">
+            ${dotsHTML}
+          </div>
         </div>
       `;
+    } else if (caseItem.image) {
+      allSlides = [caseItem.image];
+      sliderHTML = `<img src="${caseItem.image}" alt="${caseItem.title}">`;
+    } else {
+      allSlides = [];
+      sliderHTML = `<span class="case-detail__hero-placeholder">${caseItem.title}</span>`;
     }
 
     container.innerHTML = `
@@ -84,7 +110,7 @@ const CaseDetail = (() => {
         </div>
 
         <div class="case-detail__hero-image">
-          ${heroImageHTML}
+          ${sliderHTML}
         </div>
 
         <div class="case-detail__content">
@@ -102,13 +128,77 @@ const CaseDetail = (() => {
           </div>
         </div>
 
-        ${galleryHTML}
-
         <div class="case-detail__nav">
           <a href="cases.html" class="btn btn--outline">Все кейсы</a>
         </div>
       </div>
     `;
+
+    // Initialize slider interactions
+    if (allSlides.length > 1) {
+      initSlider();
+    }
+  }
+
+  function initSlider() {
+    const track = document.querySelector('.case-detail__slider-track');
+    const prevBtn = document.querySelector('.case-detail__slider-btn--prev');
+    const nextBtn = document.querySelector('.case-detail__slider-btn--next');
+    const dots = document.querySelectorAll('.case-detail__slider-dot');
+
+    if (!track) return;
+
+    // Previous button
+    prevBtn.addEventListener('click', () => {
+      goToSlide(currentSlide - 1);
+    });
+
+    // Next button
+    nextBtn.addEventListener('click', () => {
+      goToSlide(currentSlide + 1);
+    });
+
+    // Dots
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const index = parseInt(e.target.dataset.index, 10);
+        goToSlide(index);
+      });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        goToSlide(currentSlide - 1);
+      } else if (e.key === 'ArrowRight') {
+        goToSlide(currentSlide + 1);
+      }
+    });
+  }
+
+  function goToSlide(index) {
+    if (index < 0 || index >= allSlides.length) return;
+
+    const track = document.querySelector('.case-detail__slider-track');
+    const dots = document.querySelectorAll('.case-detail__slider-dot');
+
+    // GSAP animation for smooth slide transition
+    gsap.to(track, {
+      xPercent: -index * 100,
+      duration: 0.5,
+      ease: 'power2.inOut'
+    });
+
+    // Update active dot
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('case-detail__slider-dot--active');
+      } else {
+        dot.classList.remove('case-detail__slider-dot--active');
+      }
+    });
+
+    currentSlide = index;
   }
 
   function renderNotFound(container) {

@@ -18,7 +18,9 @@ const CASES_DATA = [
     image: "img/cases/cases_for_media/solomon_main.png",
     images: [
       "img/cases/cases_for_media/solomon_first.png",
-      "img/cases/cases_for_media/solomon_second.png"
+      "img/cases/cases_for_media/solomon_second.png",
+      "img/cases/solomon_barber/Преза работы 1 (Solomon).png",
+      "img/cases/solomon_barber/Преза работы 2 (Solomon).png"
     ],
     description: "Полный ребрендинг: логотип, фирменный стиль, гайдлайн и носители для технологической компании.",
     fullDescription: {
@@ -57,10 +59,10 @@ const CASES_DATA = [
   },
   {
     id: 4,
-    title: "Интернет-магазин органической косметики",
+    title: "'СК Империя' - брендинг с нуля",
     category: "web",
     tags: ["E-commerce", "UI/UX", "Разработка"],
-    image: "",
+    image: "img/cases/sk_imperia/Frame 264989.png",
     images: [],
     description: "Дизайн и разработка интернет-магазина с каталогом, корзиной и интеграцией платёжных систем.",
     fullDescription: {

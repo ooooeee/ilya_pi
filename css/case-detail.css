@@ -57,7 +57,7 @@
   gap: var(--gap-sm);
 }
 
-/* Hero Image */
+/* Hero Image / Slider */
 .case-detail__hero-image {
   width: 100%;
   aspect-ratio: 16 / 8;
@@ -65,9 +65,7 @@
   overflow: hidden;
   background: linear-gradient(135deg, var(--color-dark-secondary) 0%, var(--color-dark-card) 100%);
   margin-bottom: var(--gap-xxl);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 }
 
 .case-detail__hero-image img {
@@ -82,6 +80,90 @@
   color: rgba(255, 255, 255, 0.1);
   text-transform: uppercase;
   letter-spacing: 4px;
+}
+
+/* Slider */
+.case-detail__slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.case-detail__slider-track {
+  display: flex;
+  height: 100%;
+}
+
+.case-detail__slider-slide {
+  min-width: 100%;
+  height: 100%;
+}
+
+.case-detail__slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-detail__slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.case-detail__slider-btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.case-detail__slider-btn--prev {
+  left: 20px;
+}
+
+.case-detail__slider-btn--next {
+  right: 20px;
+}
+
+.case-detail__slider-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.case-detail__slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.case-detail__slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.case-detail__slider-dot--active {
+  background: var(--color-accent);
+  width: 28px;
+  border-radius: 5px;
 }
 
 /* Description blocks */

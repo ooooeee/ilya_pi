@@ -234,12 +234,57 @@ const Animations = (() => {
   }
 
   /* ==========================================
-     3. HERO TITLE MOUSE TILT
+     3. HERO TITLE ROTATION (DRUM EFFECT)
+     ========================================== */
+  function initTitleRotation() {
+    const title = document.querySelector('.hero__title');
+    if (!title) return;
+
+    const texts = Array.from(title.querySelectorAll('.hero__title-text'));
+    if (texts.length === 0) return;
+
+    let currentIndex = 0;
+    const intervalTime = 3000; // 3 seconds per text
+    let intervalId;
+
+    function rotateTitle() {
+      const currentText = texts[currentIndex];
+      let nextIndex = (currentIndex + 1) % texts.length;
+      const nextText = texts[nextIndex];
+
+      // Exit animation for current text
+      currentText.classList.remove('hero__title-text--active');
+      currentText.classList.add('hero__title-text--exit');
+
+      // Enter animation for next text
+      nextText.classList.remove('hero__title-text--exit');
+      nextText.classList.add('hero__title-text--active');
+
+      currentIndex = nextIndex;
+    }
+
+    // Start rotation after initial delay
+    intervalId = setInterval(rotateTitle, intervalTime);
+
+    // Pause rotation on hover
+    title.addEventListener('mouseenter', () => {
+      clearInterval(intervalId);
+    });
+
+    // Resume rotation on mouse leave
+    title.addEventListener('mouseleave', () => {
+      intervalId = setInterval(rotateTitle, intervalTime);
+    });
+  }
+
+  /* ==========================================
+     4. HERO TITLE MOUSE TILT
      ========================================== */
   function initTitleTilt() {
     const hero = document.getElementById('hero');
+    const titleWrapper = hero ? hero.querySelector('.hero__title-wrapper') : null;
     const title = hero ? hero.querySelector('.hero__title') : null;
-    if (!hero || !title) return;
+    if (!hero || !title || !titleWrapper) return;
 
     hero.addEventListener('mousemove', (e) => {
       const rect = hero.getBoundingClientRect();
@@ -249,13 +294,13 @@ const Animations = (() => {
       const tiltX = y * -4;  // degrees
       const tiltY = x * 4;
 
-      title.style.transform = `scaleY(1.3) perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      titleWrapper.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
     });
 
     hero.addEventListener('mouseleave', () => {
-      title.style.transform = 'scaleY(1.3)';
-      title.style.transition = 'transform 0.6s ease';
-      setTimeout(() => { title.style.transition = ''; }, 600);
+      titleWrapper.style.transform = '';
+      titleWrapper.style.transition = 'transform 0.6s ease';
+      setTimeout(() => { titleWrapper.style.transition = ''; }, 600);
     });
   }
 
@@ -268,6 +313,7 @@ const Animations = (() => {
 
     initParticles();
     initScrollReveal();
+    initTitleRotation();
     initTitleTilt();
   }
 
